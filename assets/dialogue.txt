@@ -1,0 +1,6 @@
+Hello, world!
+This is dialogue
+You can cycle through it with the space bar
+...but you probably already knew that
+Well, I'm out of ideas
+Seriously, I'm just going to repeat this line until you go away
