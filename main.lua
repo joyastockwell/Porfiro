@@ -1,3 +1,4 @@
+
 package.path = package.path .. ";./src/?.lua"
 
 local format 		= string.format
@@ -12,6 +13,9 @@ local  Actor		=  actor.Actor
 local  RIGHT_HEADING	=  actor.RIGHT_HEADING
 local  LEFT_HEADING	=  actor.LEFT_HEADING
 
+local dialogue = require("dialogue")
+local Bubble = dialogue.Bubble
+
 local menu		= require("menu")
 local  Button		=  menu.Button
 local  Cursor		=  menu.Cursor
@@ -19,6 +23,8 @@ local  Cursor		=  menu.Cursor
 local physical		= require("physical")
 local  Block		=  physical.Block
 local  VerticalBound	=  physical.VerticalBound
+--I think I need this because I did something wrong
+local  Physical		=  physical.Physical
 
 local visible 		= require("visible")
 local  COLOR_BLACK	= visible.COLOR_BLACK
@@ -76,7 +82,7 @@ function love.load()
 			y = 650,
 			width = WORLD_WIDTH,
 			height = 100,
-			color = COLOR_BLACK,
+			color = COLOR_RED,
 		})
 
 		world:add(floor)
@@ -86,6 +92,26 @@ function love.load()
 	
 		local right_bound = VerticalBound(WORLD_WIDTH, 0, WORLD_HEIGHT)
 		world:add_physical(right_bound)
+
+		--Dialogue bubble
+		local bubble = Bubble({
+			x = 1,
+			y = 650,
+			width = WORLD_WIDTH,
+			height = 100,
+			x_margin = 10,
+			y_margin = 10,
+			x_curve = 0.2,
+			y_curve = 0.2,
+			text = "Here, Porfiro, have a...toaster...",
+			font = {
+				filename = "assets/fonts/FreeSans.otf",
+				size = 18
+			},
+			action = function() print("No! Toaster likes it here!") end,
+			color = COLOR_BLACK
+		})
+		world:add_visible(bubble)
 
 		-- Menu
 		local button = Button({
@@ -117,7 +143,7 @@ function love.load()
 	end
 
 	setup_window()
-	--setup_sound()
+	setup_sound()
 	setup_graphics()
 	setup_physics()
 	setup_events()
