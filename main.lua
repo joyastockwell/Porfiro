@@ -25,6 +25,7 @@ local  COLOR_BLACK	= visible.COLOR_BLACK
 local  COLOR_BLUE	= visible.COLOR_BLUE
 local  COLOR_RED	= visible.COLOR_RED
 local  COLOR_WHITE	= visible.COLOR_WHITE
+local  Trapezoid	= visible.IsocelesTrapezoid
 local  Rectangle	= visible.Rectangle
 
 local world 		= require("world")
@@ -59,7 +60,9 @@ function love.load()
 
 	local function setup_graphics()
 		love.graphics.setBackgroundColor(unpack(COLOR_WHITE))
-		love.mouse.setVisible(false)
+		--love.mouse.setVisible(false)
+
+		trap = Trapezoid(400, 300, 100, 100, 45, COLOR_RED)
 	end
 
 	local function setup_dialogue()
@@ -119,7 +122,7 @@ function love.load()
 	setup_window()
 	--setup_sound()
 	setup_graphics()
-	setup_physics()
+	--setup_physics()
 	setup_events()
 end
 
@@ -157,10 +160,15 @@ local function handle_player_input(dt)
 end
 
 function love.update(dt)
-	handle_player_input(dt)	
-	cursor:update_position()
+	--handle_player_input(dt)	
+	--cursor:update_position()
 end
 
 function love.draw()
-	world:draw()
+	--world:draw()
+	trap:draw()
+	bc = {love.graphics.getColor()}
+	love.graphics.setColor(COLOR_RED)
+	love.graphics.polygon("fill", 100, 100, 100, 300, 150, 300, 150, 100)
+	love.graphics.setColor(bc)
 end

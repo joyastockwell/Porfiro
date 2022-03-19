@@ -1,6 +1,9 @@
+local insert		= table.insert
+
 local class 		= require("useful.class")
 local  Class		=  class.Class
 
+local draw_polygon	= love.graphics.polygon
 local draw_rect 	= love.graphics.rectangle
 local draw_circle	= love.graphics.circle 
 local love_draw		= love.graphics.draw
@@ -10,6 +13,11 @@ local get_global_font	= love.graphics.getFont
 local new_font		= love.graphics.newFont
 local new_image		= love.graphics.newImage
 local new_text 		= love.graphics.newText
+
+local math_ext		= require("math_ext")
+local  cos		=  math_ext.cos
+local  sin		=  math_ext.sin
+local  tan		=  math_ext.tan
 
 local visible = { }
 
@@ -87,6 +95,52 @@ visible.Circle = Class(visible.Visible, {
 		draw_circle(self.mode, xx, yy, self.radius)	
 			
 		set_global_color(unpack(last_color))
+	end
+})
+
+visible.Polygon = Class(visible.Visible, {
+	new = function(self, vertices, color, draw_mode)
+		self.vertices = vertices 
+		self.color = color or {get_global_color()}
+		self.draw_mode = draw_mode or "fill"
+	end,
+
+	draw = function(self)
+		local last_color = {get_global_color()}	
+		set_global_color(unpack(self.color))
+
+		draw_polygon(self.draw_mode, self.vertices)		
+
+		set_global_color(unpack(last_color))
+	end
+})
+
+visible.IsocelesTrapezoid = Class(visible.Polygon, {
+	new = function(self, x, y, width, height, angle, color, draw_mode)
+		print("Dviding this time")
+		self.vertices = {x, y}			
+		print(x, y)
+
+		print("angle:", angle)
+		print("tan", tan(angle))
+		print("h * tan:", height * tan(angle))
+		print("h / tan:", height / tan(angle))
+		local x_n = x + (height / tan(angle))
+		insert(self.vertices, x_n)
+		insert(self.vertices, y + height)
+		print(x_n, y + height)
+
+		x_n = x + width - (height / tan(angle))
+		insert(self.vertices, x_n)
+		insert(self.vertices, y + height)
+		print(x_n, y + height)
+		
+		insert(self.vertices, x + width)
+		insert(self.vertices, y)
+		print(x + width, y)
+
+		self.color = color or {get_global_color()}
+		self.draw_mode = draw_mode or "fill"
 	end
 })
 
