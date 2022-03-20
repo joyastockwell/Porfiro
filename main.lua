@@ -25,7 +25,7 @@ local  COLOR_BLACK	= visible.COLOR_BLACK
 local  COLOR_BLUE	= visible.COLOR_BLUE
 local  COLOR_RED	= visible.COLOR_RED
 local  COLOR_WHITE	= visible.COLOR_WHITE
-local  Trapezoid	= visible.IsocelesTrapezoid
+local  Floor		= visible.Floor
 local  Rectangle	= visible.Rectangle
 
 local world 		= require("world")
@@ -62,7 +62,7 @@ function love.load()
 		love.graphics.setBackgroundColor(unpack(COLOR_WHITE))
 		--love.mouse.setVisible(false)
 
-		trap = Trapezoid(400, 300, 100, 100, COLOR_RED)
+		 floor = Floor(0, 650, 990, 100, 1.2, COLOR_RED)
 	end
 
 	local function setup_dialogue()
@@ -166,5 +166,5 @@ end
 
 function love.draw()
 	--world:draw()
-	trap:draw()
+	floor:draw()
 end

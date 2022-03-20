@@ -116,38 +116,50 @@ visible.Polygon = Class(visible.Visible, {
 	end
 })
 
-visible.IsocelesTrapezoid = Class(visible.Polygon, {
-	new = function(self, x, y, base_width, height, angle, color, draw_mode)
+local IsocelesTrapezoid = Class(visible.Polygon, {
+	new = function(self, trapezoid_initializer)
+		local x = trapezoid_initializer.x
+		local y = trapezoid_initializer.y
+		local base_width = trapezoid_initializer.base_width
+		local top_width = trapezoid_initializer.top_width
+		local base_delta = (base_width - top_width) / 2
 
-		
+		self.vertices = {x, y}
 
-		top_width = base_width - 2 * 
-		angle = atan(height/(base_width - top_width))
+		xn = x + base_delta
+		yn = y - trapezoid_initializer.height
+		insert(self.vertices, xn)
+		insert(self.vertices, yn)
 
-		print("Dviding this time")
-		self.vertices = {x, y}			
-		print(x, y)
+		xn = x + base_width - base_delta
+		insert(self.vertices, xn)
+		insert(self.vertices, yn)
 
-		print("angle:", angle)
-		print("tan", tan(angle))
-		print("h * tan:", height * tan(angle))
-		print("h / tan:", height / tan(angle))
-		local x_n = x + (height / tan(angle))
-		insert(self.vertices, x_n)
-		insert(self.vertices, y + height)
-		print(x_n, y + height)
-
-		x_n = x + base_width - (height / tan(angle))
-		insert(self.vertices, x_n)
-		insert(self.vertices, y + height)
-		print(x_n, y + height)
-		
-		insert(self.vertices, x + base_width)
+		xn = x + base_width
+		insert(self.vertices, xn)
 		insert(self.vertices, y)
-		print(x + base_width, y)
 
-		self.color = color or {get_global_color()}
+		self.color = trapezoid_initializer.color or {get_global_color()}
 		self.draw_mode = draw_mode or "fill"
+	end
+})
+visible.IsocelesTrapezoid = IsocelesTrapezoid
+
+visible.Floor = Class({
+	new = function(self, x, y, width, height, depth_scale, color)
+		initializer = {
+			x = x,
+			y = y,
+			base_width = width,
+			top_width = width / depth_scale,
+			height = height,
+			color = color
+		}
+		self.trapezoid = IsocelesTrapezoid(initializer)
+	end,
+	
+	draw = function(self)
+		self.trapezoid:draw()
 	end
 })
 
