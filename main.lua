@@ -62,7 +62,7 @@ function love.load()
 		love.graphics.setBackgroundColor(unpack(COLOR_WHITE))
 		--love.mouse.setVisible(false)
 
-		trap = Trapezoid(400, 300, 100, 100, 45, COLOR_RED)
+		trap = Trapezoid(400, 300, 100, 100, COLOR_RED)
 	end
 
 	local function setup_dialogue()
@@ -167,8 +167,4 @@ end
 function love.draw()
 	--world:draw()
 	trap:draw()
-	bc = {love.graphics.getColor()}
-	love.graphics.setColor(COLOR_RED)
-	love.graphics.polygon("fill", 100, 100, 100, 300, 150, 300, 150, 100)
-	love.graphics.setColor(bc)
 end

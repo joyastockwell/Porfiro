@@ -18,6 +18,7 @@ local math_ext		= require("math_ext")
 local  cos		=  math_ext.cos
 local  sin		=  math_ext.sin
 local  tan		=  math_ext.tan
+local  atan     =  math_ext.atan
 
 local visible = { }
 
@@ -116,7 +117,13 @@ visible.Polygon = Class(visible.Visible, {
 })
 
 visible.IsocelesTrapezoid = Class(visible.Polygon, {
-	new = function(self, x, y, width, height, angle, color, draw_mode)
+	new = function(self, x, y, base_width, height, angle, color, draw_mode)
+
+		
+
+		top_width = base_width - 2 * 
+		angle = atan(height/(base_width - top_width))
+
 		print("Dviding this time")
 		self.vertices = {x, y}			
 		print(x, y)
@@ -130,14 +137,14 @@ visible.IsocelesTrapezoid = Class(visible.Polygon, {
 		insert(self.vertices, y + height)
 		print(x_n, y + height)
 
-		x_n = x + width - (height / tan(angle))
+		x_n = x + base_width - (height / tan(angle))
 		insert(self.vertices, x_n)
 		insert(self.vertices, y + height)
 		print(x_n, y + height)
 		
-		insert(self.vertices, x + width)
+		insert(self.vertices, x + base_width)
 		insert(self.vertices, y)
-		print(x + width, y)
+		print(x + base_width, y)
 
 		self.color = color or {get_global_color()}
 		self.draw_mode = draw_mode or "fill"

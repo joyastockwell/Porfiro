@@ -3,6 +3,7 @@ local pi	= math.pi
 local cos	= math.cos
 local sin 	= math.sin
 local tan	= math.tan
+local atan  = math.atan
 
 local math_ext	= { }
 
@@ -24,6 +25,10 @@ end
 
 math_ext.tan = function(angle_degrees)
 	return tan(degrees_to_radians(angle_degrees))
+end
+
+math_ext.atan = function(height_over_length)
+	return atan(height_over_length)
 end
 
 math_ext.radians_to_degrees = radians_to_degrees
