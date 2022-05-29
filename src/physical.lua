@@ -70,6 +70,10 @@ physical.Block = Class(Visible, physical.Physical, {
 		draw_rect(mode, xx, yy, width, height, rx, ry)
 		
 		set_global_color(unpack(last_color))
+	end,
+
+	type = function()
+		return "block"
 	end
 })
 

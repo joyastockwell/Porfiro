@@ -58,7 +58,7 @@ menu.Cursor = Class(Visible, Physical, {
 	end,
 
 	update_position = function(self)
-		if (self._world == nil) then
+		if (self._bump_world == nil) then
 			return
 		end
 
@@ -76,7 +76,7 @@ menu.Cursor = Class(Visible, Physical, {
 		self.x = get_mouse_x()
 		self.y = get_mouse_y()
 	
-		local _,_, cols = self._world:move(self, self.x, self.y, collide)
+		local _,_, cols = self._bump_world:move(self, self.x, self.y, collide)
 
 		-- Flag all items that appear in the "collision" (i.e. 
 		-- objects the mouse is hovering over. The boolean value

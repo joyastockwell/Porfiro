@@ -46,9 +46,14 @@ actor.Actor = Class(Visible, Physical, {
 
 	move = function(self, dx, dy)
 		local function collide(actor, other)
-			if other.type() == "cursor" then
+			local collided_with = other.type()
+			if collided_with == "cursor" then
 				return "cross"
 			end
+			if collided_with == "block" then
+				print("meep mop moop\n")
+			end
+
 
 			return "slide"
 		end
