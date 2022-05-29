@@ -11,12 +11,12 @@ local  Visible 		=  visible.Visible
 local physical = { }
 
 physical.Physical = Class {
-	set_world = function(self, world) 
-		self._world = world
+	set_bump_world = function(self, world) 
+		self._bump_world = world
 	end,
 
-	unset_world = function(self) 
-		self._world = nil
+	unset_bump_world = function(self) 
+		self._bump_world = nil
 	end,
 
 	type = function()

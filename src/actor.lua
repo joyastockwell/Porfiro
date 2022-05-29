@@ -56,7 +56,7 @@ actor.Actor = Class(Visible, Physical, {
 		local x = self.x + dx
 		local y = self.y + dy
 
-		x, y, collisions = self._world:move(self, x, y, collide)
+		x, y, collisions = self._bump_world:move(self, x, y, collide)
 		
 		self.x = x
 		self.y = y

@@ -79,7 +79,16 @@ function love.load()
 			color = COLOR_BLACK,
 		})
 
+		local bookcase = Block({
+			x = 500,
+			y = 100,
+			width = 50,
+			height = 500,
+			color = COLOR_BLACK,
+		})
+
 		world:add(floor)
+		world:add(bookcase)
 
 		local left_bound = VerticalBound(0, 0, WORLD_HEIGHT)
 		world:add_physical(left_bound)
@@ -87,23 +96,23 @@ function love.load()
 		local right_bound = VerticalBound(WORLD_WIDTH, 0, WORLD_HEIGHT)
 		world:add_physical(right_bound)
 
-		-- Menu
-		local button = Button({
-			x = 500,
-			y = 375,
-			x_margin = 10,
-			y_margin = 10,
-			x_curve = 0.2,
-			y_curve = 0.2,
-			text = "Hello, world",
-			font = {
-				filename = "assets/fonts/FreeSans.otf",
-				size = 18
-			},
-			action = function() print("Hello, world!") end,
-			color = COLOR_RED
-		})
-		world:add(button)
+		-- -- Menu
+		-- local button = Button({
+		-- 	x = 500,
+		-- 	y = 375,
+		-- 	x_margin = 10,
+		-- 	y_margin = 10,
+		-- 	x_curve = 0.2,
+		-- 	y_curve = 0.2,
+		-- 	text = "Hello, world",
+		-- 	font = {
+		-- 		filename = "assets/fonts/FreeSans.otf",
+		-- 		size = 18
+		-- 	},
+		-- 	action = function() print("Hello, world!") end,
+		-- 	color = COLOR_RED
+		-- })
+		-- world:add(button)
 
 		cursor = Cursor("assets/cursor.png", 0, 0)
 		world:add(cursor)

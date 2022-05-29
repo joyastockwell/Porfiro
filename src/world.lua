@@ -9,7 +9,7 @@ local world = { }
 
 world.World = Class {
 	new = function(self)
-		self._world = bump.newWorld()
+		self._bump_world = bump.newWorld()
 		self._draw_list = { }
 	end,
 
@@ -19,8 +19,8 @@ world.World = Class {
 		local width = physical.width
 		local height = physical.height
 
-		self._world:add(physical, x, y, width, height)
-		physical:set_world(self._world)	
+		self._bump_world:add(physical, x, y, width, height)
+		physical:set_bump_world(self._bump_world)	
 	end,
 
 	add_visible = function(self, visible)
@@ -33,8 +33,8 @@ world.World = Class {
 	end,
 	
 	remove = function(self, physical)
-		self._world:remove(physical)
-		physical:unset_world(self)	
+		self._bump_world:remove(physical)
+		physical:unset_bump_world(self)	
 	end, 
 
 	draw = function(self)
