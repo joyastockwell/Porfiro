@@ -89,7 +89,12 @@ physical.Aura = Class(physical.Physical, {
 		local y_curve = initializer.y_curve or 0
 
 		self.rx = self.width * (x_curve / 2) 
-		self.ry = self.height * (y_curve /2 )
+		self.ry = self.height * (y_curve /2)
+
+	end,
+
+	set_on_collide = function(self, func)
+		self.on_collide = func
 	end,
 	
 	type = function()

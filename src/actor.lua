@@ -53,7 +53,7 @@ actor.Actor = Class(Visible, Physical, {
 			end
 
 			if collided_with == "aura" then
-				print("aura!")
+				other.on_collide()
 				return "slide"
 			end
 

@@ -80,15 +80,28 @@ function love.load()
 			color = COLOR_BLACK,
 		})
 
-		local flaura = Aura({
-			x = 0,
-			y = 650,
-			width = WORLD_WIDTH,
-			height = 110
+		local bookcase = Block({
+			x = WORLD_WIDTH/2,
+			y = 450,
+			width = 100,
+			height = 100,
+			color = COLOR_BLUE,
 		})
 
+		local bookcase_aura = Aura({
+			x = WORLD_WIDTH/2,
+			y = 650,
+			width = 110,
+			height = 200,
+		})
+
+		bookcase_on_collide = function() print("\nCollected Modern Poems\nOrganic Chemistry 3\nAbrahamic Religion in the Ancient World\nOrganic Chemistry 2\nHoly Bible\nBeginning Chemistry 2") end
+
+		bookcase_aura:set_on_collide(bookcase_on_collide)
+
 		world:add(floor)
-		world:add_physical(flaura)
+		world:add(bookcase)
+		world:add_physical(bookcase_aura)
 
 		local left_bound = VerticalBound(0, 0, WORLD_HEIGHT)
 		world:add_physical(left_bound)
