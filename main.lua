@@ -19,6 +19,7 @@ local  Cursor		=  menu.Cursor
 local physical		= require("physical")
 local  Block		=  physical.Block
 local  VerticalBound	=  physical.VerticalBound
+local  Aura				=  physical.Aura
 
 local visible 		= require("visible")
 local  COLOR_BLACK	= visible.COLOR_BLACK
@@ -79,16 +80,15 @@ function love.load()
 			color = COLOR_BLACK,
 		})
 
-		local bookcase = Block({
-			x = 500,
-			y = 100,
-			width = 50,
-			height = 500,
-			color = COLOR_BLACK,
+		local flaura = Aura({
+			x = 0,
+			y = 650,
+			width = WORLD_WIDTH,
+			height = 110
 		})
 
 		world:add(floor)
-		world:add(bookcase)
+		world:add_physical(flaura)
 
 		local left_bound = VerticalBound(0, 0, WORLD_HEIGHT)
 		world:add_physical(left_bound)

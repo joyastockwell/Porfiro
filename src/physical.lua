@@ -77,4 +77,25 @@ physical.Block = Class(Visible, physical.Physical, {
 	end
 })
 
+physical.Aura = Class(physical.Physical, {
+	new = function(self, initializer)
+		self.x = initializer.x
+		self.y = initializer.y
+
+		self.width = initializer.width
+		self.height = initializer.height
+
+		local x_curve = initializer.x_curve or 0
+		local y_curve = initializer.y_curve or 0
+
+		self.rx = self.width * (x_curve / 2) 
+		self.ry = self.height * (y_curve /2 )
+	end,
+	
+	type = function()
+		return "aura"
+	end
+	
+})
+
 return physical
