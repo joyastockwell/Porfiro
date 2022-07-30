@@ -45,16 +45,17 @@ actor.Actor = Class(Visible, Physical, {
 	end,
 
 	move = function(self, dx, dy)
+
+		local test_int = 0
+
 		local function collide(actor, other)
 			local collided_with = other.type()
-			
-			if collided_with == "cursor" then
-				return "cross"
-			end
 
 			if collided_with == "aura" then
-				other.on_collide()
-				return "slide"
+				-- print(test_int)
+				-- test_int = test_int + 1
+				other.on_enter()
+				return "cross"
 			end
 
 

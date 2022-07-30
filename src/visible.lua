@@ -118,6 +118,8 @@ visible.Text = Class(visible.Visible, {
 
 		self._str = initializer.string
 	
+		self.color = initializer.color
+
 		if initializer.font ~= nil then
 			self._font_path = initializer.font.filename
 			self._font_size = initializer.font.size
@@ -159,7 +161,7 @@ visible.Text = Class(visible.Visible, {
 		local yy = y or self.y
 		
 		local last_color = { get_global_color() }	
-		set_global_color(0, 0, 0)
+		set_global_color(self.color)
 	
 		love_draw(self._text, xx, yy)
 		

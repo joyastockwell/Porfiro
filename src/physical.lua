@@ -93,8 +93,8 @@ physical.Aura = Class(physical.Physical, {
 
 	end,
 
-	set_on_collide = function(self, func)
-		self.on_collide = func
+	set_on_enter = function(self, func)
+		self.on_enter = func
 	end,
 	
 	type = function()

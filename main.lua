@@ -27,6 +27,7 @@ local  COLOR_BLUE	= visible.COLOR_BLUE
 local  COLOR_RED	= visible.COLOR_RED
 local  COLOR_WHITE	= visible.COLOR_WHITE
 local  Rectangle	= visible.Rectangle
+local  Text			= visible.Text
 
 local world 		= require("world")
 local  World		=  world.World
@@ -95,13 +96,22 @@ function love.load()
 			height = 200,
 		})
 
-		bookcase_on_collide = function() print("\nCollected Modern Poems\nOrganic Chemistry 3\nAbrahamic Religion in the Ancient World\nOrganic Chemistry 2\nHoly Bible\nBeginning Chemistry 2") end
 
-		bookcase_aura:set_on_collide(bookcase_on_collide)
+		local sample_text = Text({
+			x = 0,
+			y = 650,
+			string = "The Carnelian Lady",
+			color = COLOR_RED,
+		})
+
+		bookcase_on_enter = function() print("\nCollected Modern Poems\nOrganic Chemistry 3\nPoems of the Buddhist Masters\nOrganic Chemistry 2\nHoly Bible\nBeginning Chemistry 2") end
+
+		bookcase_aura:set_on_enter(bookcase_on_enter)
 
 		world:add(floor)
 		world:add(bookcase)
 		world:add_physical(bookcase_aura)
+		world:add_visible(sample_text)
 
 		local left_bound = VerticalBound(0, 0, WORLD_HEIGHT)
 		world:add_physical(left_bound)
@@ -109,37 +119,14 @@ function love.load()
 		local right_bound = VerticalBound(WORLD_WIDTH, 0, WORLD_HEIGHT)
 		world:add_physical(right_bound)
 
-		-- -- Menu
-		-- local button = Button({
-		-- 	x = 500,
-		-- 	y = 375,
-		-- 	x_margin = 10,
-		-- 	y_margin = 10,
-		-- 	x_curve = 0.2,
-		-- 	y_curve = 0.2,
-		-- 	text = "Hello, world",
-		-- 	font = {
-		-- 		filename = "assets/fonts/FreeSans.otf",
-		-- 		size = 18
-		-- 	},
-		-- 	action = function() print("Hello, world!") end,
-		-- 	color = COLOR_RED
-		-- })
-		-- world:add(button)
-
-		cursor = Cursor("assets/cursor.png", 0, 0)
-		world:add(cursor)
-
 	end
 	
 	local function setup_events()
-		love.mousepressed = function(x, y, button)
-			cursor:handle_mouse_press(button)
-		end
+		--TODO
 	end
 
 	setup_window()
-	--setup_sound()
+	setup_sound()
 	setup_graphics()
 	setup_physics()
 	setup_events()
@@ -179,8 +166,7 @@ local function handle_player_input(dt)
 end
 
 function love.update(dt)
-	handle_player_input(dt)	
-	cursor:update_position()
+	handle_player_input(dt)
 end
 
 function love.draw()
