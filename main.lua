@@ -12,6 +12,10 @@ local  Actor		=  actor.Actor
 local  RIGHT_HEADING	=  actor.RIGHT_HEADING
 local  LEFT_HEADING	=  actor.LEFT_HEADING
 
+local listener 		= require("listener")
+local  Listener		=  listener.Listener
+local  DoOnceListener = listener.DoOnceListener
+
 local menu		= require("menu")
 local  Button		=  menu.Button
 local  Cursor		=  menu.Cursor
@@ -69,7 +73,7 @@ function love.load()
 
 	local function setup_physics()
 		world = World()
-
+		
 		cornelia = Actor(1, 0, cornelia_l, cornelia_r)
 		world:add(cornelia)
 
@@ -81,21 +85,6 @@ function love.load()
 			color = COLOR_BLACK,
 		})
 
-		local bookcase = Block({
-			x = WORLD_WIDTH/2,
-			y = 450,
-			width = 100,
-			height = 100,
-			color = COLOR_BLUE,
-		})
-
-		local bookcase_aura = Aura({
-			x = WORLD_WIDTH/2,
-			y = 650,
-			width = 110,
-			height = 200,
-		})
-
 
 		local sample_text = Text({
 			x = 0,
@@ -104,13 +93,8 @@ function love.load()
 			color = COLOR_RED,
 		})
 
-		bookcase_on_enter = function() print("\nCollected Modern Poems\nOrganic Chemistry 3\nPoems of the Buddhist Masters\nOrganic Chemistry 2\nHoly Bible\nBeginning Chemistry 2") end
-
-		bookcase_aura:set_on_enter(bookcase_on_enter)
-
+		
 		world:add(floor)
-		world:add(bookcase)
-		world:add_physical(bookcase_aura)
 		world:add_visible(sample_text)
 
 		local left_bound = VerticalBound(0, 0, WORLD_HEIGHT)
