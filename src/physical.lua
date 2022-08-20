@@ -77,6 +77,9 @@ physical.Block = Class(Visible, physical.Physical, {
 	end
 })
 
+physical.Mobile = Class(physical.Physical, {	
+})
+
 physical.Aura = Class(physical.Physical, {
 	new = function(self, initializer)
 		self.x = initializer.x

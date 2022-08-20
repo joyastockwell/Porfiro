@@ -7,49 +7,34 @@ local listener = { }
 
 listener.Listener = Class { 
     
-	subscribe = function(handler, event_list) 
+    --an event is a predicate, action pair. Both are functions
+    new = function(self)
+        self.events = {}
     end,
 
-    lis = function()
+	register = function(predicate, action) 
+    end,
+
+    poll = function(self)
+    end,
+
+    unregister = function(self)
     end
 
 }
 
 
-listener.AuraListener = Class(listener.Listener, {
-	new = function(self)
-        self.subscribers_by_event = {}
-	end,
+listener.DoOnceListener = Class(listener.Listener, {
 
-    subscribe = function(handler, event_list)
-        for event in ipairs(event_list) do
-            insert(self.subscribers_by_event[event],handler)
-        end
+    new = function(self)
+        self.events = {}
     end,
 
-    lis = function(self)
-        i = love.event.poll()
-        if love.event then
-            love.event.pump()
-            for name in love.event.poll() do 
-                if name ~= "quit" then
-                    print("meep")
-                    print(name)
-                end
-            end
-        end
-        -- print(love.event)
-        -- print(love.event.pump())
-        -- for n in love.event.poll() do 
-        --     if n == "keypressed" then
-        --         print("moop")
-        --         -- if a =="w" then
-        --         --     print("w was pressed")
-        --         -- end
-        --     end
-        -- end
-    end    
-
+    register = function(self, predicate, action)
+            event = {predicate, action}
+            insert(self.events, event)
+            print(self.events[1][2])
+    end
 
 })
 

@@ -52,8 +52,6 @@ actor.Actor = Class(Visible, Physical, {
 			local collided_with = other.type()
 
 			if collided_with == "aura" then
-				-- print(test_int)
-				-- test_int = test_int + 1
 				other.on_enter()
 				return "cross"
 			end
