@@ -1,2 +1,3 @@
 # Porfiro
-Fantasy RPG
+Fantasy RPG assets
+Currently working on movement system
